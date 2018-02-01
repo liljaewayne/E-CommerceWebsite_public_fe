@@ -1,5 +1,21 @@
 var webpack = require("webpack");
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+
+/**
+ * 获取html-webpack-plugin参数
+ * @param name
+ * @returns {{template: string, filename: string, inject: boolean, hash: boolean, chunks: *[]}}
+ */
+var getHtmlConfig = function (name) {
+    return {
+        template: "./src/view/" + name + ".html",
+        filename: "view/" + name + ".html",
+        inject: true,
+        hash: true,
+        chunks: ['common', name]
+    }
+}
 
 var config = {
     entry: {
@@ -30,17 +46,37 @@ var config = {
                     fallback: "style-loader",
                     use: "css-loader"
                 })
+            },
+            {
+                test: /\.(gif|png|jpg|woff|svg|eot|ttf)\??.*$/,
+
+                /*use: [
+                    "url-loader?limit=10&name=resource/[name].[ext]"
+                ]*/
+                use: [
+                    {
+                        loader: "url-loader",
+                        options: {
+                            limit: 100,
+                            name: "resource/[name].[ext]"
+                        }
+                    }
+                ]
             }
         ]
 
     },
     plugins: [
+        // 独立通用模块到js/base.js
         new webpack.optimize.CommonsChunkPlugin({
             name: "common",
             filename: "js/base.js"
         }),
         // css单独打包到文件里
-        new ExtractTextPlugin("css/[name].css")
+        new ExtractTextPlugin("css/[name].css"),
+        // html模板处理
+        new HtmlWebpackPlugin(getHtmlConfig('index')),
+        new HtmlWebpackPlugin(getHtmlConfig('login'))
     ]
 };
 
