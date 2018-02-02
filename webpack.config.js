@@ -2,6 +2,10 @@ var webpack = require("webpack");
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
+// 环境变量配置, dev / online
+var WEBPACK_ENV = process.env.WEBPACK_ENV || "dev";
+console.log(WEBPACK_ENV);
+
 /**
  * 获取html-webpack-plugin参数
  * @param name
@@ -14,8 +18,8 @@ var getHtmlConfig = function (name) {
         inject: true,
         hash: true,
         chunks: ['common', name]
-    }
-}
+    };
+};
 
 var config = {
     entry: {
@@ -25,6 +29,7 @@ var config = {
     },
     output: {
         path: "D:\\workspaces\\E-CommerceWebsite_public_fe\\dist",
+        publicPath: "/dist",
         filename: "js/[name].js"
     },
     externals: {
@@ -79,5 +84,9 @@ var config = {
         new HtmlWebpackPlugin(getHtmlConfig('login'))
     ]
 };
+
+if ("dev"===WEBPACK_ENV){
+    config.entry.common.push("webpack-dev-server/client?http://localhost:8088/");
+}
 
 module.exports = config;
