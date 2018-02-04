@@ -37,13 +37,6 @@ var config = {
         "jquery": "window.jQuery"
     },
     module: {
-        /* old version
-        loaders: [
-            {
-                test: /\.css$/,
-                loader: ExtractTextPlugin.extract("style-loader", "css-loader")
-            }
-        ],*/
         rules: [
             {
                 test: /\.css$/,
@@ -54,10 +47,6 @@ var config = {
             },
             {
                 test: /\.(gif|png|jpg|woff|svg|eot|ttf)\??.*$/,
-
-                /*use: [
-                    "url-loader?limit=10&name=resource/[name].[ext]"
-                ]*/
                 use: [
                     {
                         loader: "url-loader",
@@ -70,6 +59,14 @@ var config = {
             }
         ]
 
+    },
+    resolve: {
+        alias: {
+            util: __dirname + '/src/util', /* __dirname 代表根目录 */
+            page: __dirname + '/src/page',
+            service: __dirname + '/src/service',
+            image: __dirname + '/src/image'
+        }
     },
     plugins: [
         // 独立通用模块到js/base.js
@@ -85,7 +82,7 @@ var config = {
     ]
 };
 
-if ("dev"===WEBPACK_ENV){
+if ("dev" === WEBPACK_ENV) {
     config.entry.common.push("webpack-dev-server/client?http://localhost:8088/");
 }
 
