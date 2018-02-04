@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/liljaewayne/E-CommerceWebsite_public_fe#readme",
   "dependencies": {
+    "font-awesome": "^4.7.0",
     "hogan": "^1.0.2"
   },
   "devDependencies": {

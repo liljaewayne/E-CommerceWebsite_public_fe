@@ -56,13 +56,22 @@ var config = {
                         }
                     }
                 ]
+            },
+            {
+                test: /\.string/,
+                use: [
+                    {
+                        loader: "html-loader"
+                    }
+                ]
             }
         ]
 
     },
     resolve: {
         alias: {
-            util: __dirname + '/src/util', /* __dirname 代表根目录 */
+            node_modules: __dirname + '/node_modules', /* __dirname 代表根目录 */
+            util: __dirname + '/src/util',
             page: __dirname + '/src/page',
             service: __dirname + '/src/service',
             image: __dirname + '/src/image'

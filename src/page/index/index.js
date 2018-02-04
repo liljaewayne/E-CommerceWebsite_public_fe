@@ -1,13 +1,9 @@
 "use strict";
-
+require('page/common/nav/index.js');
+require('page/common/header/index.js');
 var _commerce = require('util/commerce.js');
+var navSide = require('page/common/nav-side/index.js');
 
-// console.log(_commerce.getUrlParam('test'));
-
-var html = '<div>{{data}}</div>';
-
-var data = {
-    data: "Hello Hogan"
-};
-
-console.log(_commerce.renderHtml(html, data));
+navSide.init({
+    name:'order-list'
+});
