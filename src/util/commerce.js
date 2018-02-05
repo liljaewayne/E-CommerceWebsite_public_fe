@@ -42,11 +42,11 @@ var _commerce = {
     // 跳转到登陆页面
     doLogin: function () {
         // 特殊字符需要编码, 否则会导致整体url被破坏
-        window.location.href = './login.html?redirect=' + encodeURIComponent(window.location.href);
+        window.location.href = './user-login.html?redirect=' + encodeURIComponent(window.location.href);
     },
 
     // 获取服务器地址
-    getServerUtl: function (path) {
+    getServerUrl: function (path) {
         return conf.serverHost + path;
     },
 
