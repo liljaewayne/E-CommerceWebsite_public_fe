@@ -15,6 +15,7 @@ var getHtmlConfig = function (name, title) {
     return {
         template: "./src/view/" + name + ".html",
         filename: "view/" + name + ".html",
+        favicon: './favicon.ico',
         title: title,
         inject: true,
         hash: true,
@@ -43,8 +44,9 @@ var config = {
         'about': ['./src/page/about/index.js']
     },
     output: {
-        path: "D:\\workspaces\\E-CommerceWebsite_public_fe\\dist",
-        publicPath: "/dist",
+        // path: "D:\\workspaces\\E-CommerceWebsite_public_fe\\dist\\",
+        path: __dirname + "/dist/",
+        publicPath: "dev" === WEBPACK_ENV ? "/dist/" : "//s.liujianwei.top/commerce-fe/dist/",
         filename: "js/[name].js"
     },
     externals: {
@@ -76,7 +78,11 @@ var config = {
                 test: /\.string/,
                 use: [
                     {
-                        loader: "html-loader"
+                        loader: "html-loader",
+                        query: {
+                            minimize: true,
+                            removeAttributeQuotes: false
+                        }
                     }
                 ]
             }
