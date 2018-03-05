@@ -46,7 +46,7 @@ var config = {
     output: {
         // path: "D:\\workspaces\\E-CommerceWebsite_public_fe\\dist\\",
         path: __dirname + "/dist/",
-        publicPath: "dev" === WEBPACK_ENV ? "/dist/" : "//s.liujianwei.top/commerce-fe/dist/",
+        publicPath: "dev" === WEBPACK_ENV ? "/dist/" : "//s.liujianwei.top/commerce-public-fe/dist/",
         filename: "js/[name].js"
     },
     externals: {
