@@ -38,8 +38,7 @@ var nav = {
                 .siblings('.user.login').show()
                 .find('.username').text(res.username);
         }, function (errMsg) {
-            console.log("user info load failure");
-            _commerce.errorTips(errMsg);
+            console.log("加载用户信息失败:", errMsg);
         });
     },
     // 加载购物车数量
