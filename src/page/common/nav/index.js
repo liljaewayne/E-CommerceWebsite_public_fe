@@ -38,7 +38,6 @@ var nav = {
                 .siblings('.user.login').show()
                 .find('.username').text(res.username);
         }, function (errMsg) {
-            console.log("user info load failure");
             _commerce.errorTips(errMsg);
         });
     },
