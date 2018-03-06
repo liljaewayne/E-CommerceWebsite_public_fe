@@ -4,7 +4,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 // 环境变量配置, dev / online
 var WEBPACK_ENV = process.env.WEBPACK_ENV || "dev";
-console.log(WEBPACK_ENV);
+console.log("WEBPACK_ENV:", WEBPACK_ENV);
 
 /**
  * 获取html-webpack-plugin参数
@@ -44,9 +44,10 @@ var config = {
         'about': ['./src/page/about/index.js']
     },
     output: {
-        // path: "D:\\workspaces\\E-CommerceWebsite_public_fe\\dist\\",
         path: __dirname + "/dist/",
-        publicPath: "dev" === WEBPACK_ENV ? "/dist/" : "//s.liujianwei.top/commerce-public-fe/dist/",
+        // publicPath: "/dist/",
+        // WEBPACK_ENV=dev
+        publicPath: WEBPACK_ENV === "dev" ? "/dist/" : "//s.liujianwei.top/commerce-public-fe/dist/",
         filename: "js/[name].js"
     },
     externals: {
@@ -123,7 +124,16 @@ var config = {
         new HtmlWebpackPlugin(getHtmlConfig('user-pass-update', '修改密码')),
         new HtmlWebpackPlugin(getHtmlConfig('result', '操作结果')),
         new HtmlWebpackPlugin(getHtmlConfig('about', '关于commerce'))
-    ]
+    ],
+    devServer: {
+        port: 8088,
+        inline: true,
+        proxy: [{
+            context: ["/user", "/product", "/cart", "/shipping", "/order"],
+            target: "http://www.liujianwei.top",
+            changeOrigin: true
+        }]
+    }
 };
 
 if ("dev" === WEBPACK_ENV) {
