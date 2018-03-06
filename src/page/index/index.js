@@ -1,5 +1,6 @@
 'use strict';
 require('./index.css');
+require('page/common/notice/index.js');
 require('page/common/nav/index.js');
 require('page/common/header/index.js');
 require('util/slider/index.js');
